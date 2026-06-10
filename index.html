@@ -1,0 +1,219 @@
+```html
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>부산항공고등학교 기숙사 관리 시스템</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    margin:0;
+    background:#f5f5f5;
+}
+
+header{
+    background:#003366;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+.container{
+    max-width:800px;
+    margin:auto;
+    padding:20px;
+}
+
+.menu{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    justify-content:center;
+    margin-bottom:20px;
+}
+
+.menu button{
+    padding:15px 20px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    background:#0055aa;
+    color:white;
+    font-size:16px;
+}
+
+.section{
+    display:none;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 5px rgba(0,0,0,0.2);
+}
+
+.section.active{
+    display:block;
+}
+
+input,
+select,
+textarea{
+    width:100%;
+    padding:10px;
+    margin-top:5px;
+    margin-bottom:15px;
+    box-sizing:border-box;
+}
+
+.submit-btn{
+    background:#0066cc;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+#home{
+    display:block;
+    text-align:center;
+}
+
+@media(max-width:600px){
+    .menu{
+        flex-direction:column;
+    }
+
+    .menu button{
+        width:100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>부산항공고등학교 기숙사 관리 시스템</h1>
+</header>
+
+<div class="container">
+
+    <div class="menu">
+        <button onclick="showSection('overnight')">외박/지연귀사 등록</button>
+        <button onclick="showSection('repair')">고장 신고</button>
+        <button onclick="showSection('bus')">배차표 확인</button>
+    </div>
+
+    <div id="home" class="section active">
+        <h2>메뉴를 선택하세요.</h2>
+    </div>
+
+    <!-- 외박 -->
+    <div id="overnight" class="section">
+
+        <h2>외박 / 지연귀사 등록</h2>
+
+        <label>교사용 비밀번호</label>
+        <input type="password" id="teacherPassword">
+
+        <button class="submit-btn" onclick="checkPassword()">
+            확인
+        </button>
+
+        <div id="overnightForm" style="display:none; margin-top:20px;">
+
+            <label>목적</label>
+            <select>
+                <option>지연 귀사</option>
+                <option>외박</option>
+            </select>
+
+            <label>학번</label>
+            <input type="text">
+
+            <label>이름</label>
+            <input type="text">
+
+            <label>사유</label>
+            <textarea rows="5"></textarea>
+
+            <button class="submit-btn">
+                등록하기
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- 고장 신고 -->
+    <div id="repair" class="section">
+
+        <h2>기숙사 고장 신고</h2>
+
+        <label>호실</label>
+        <input type="text" id="room">
+
+        <label>신고자</label>
+        <input type="text" id="name">
+
+        <label>고장 위치</label>
+        <textarea id="location"></textarea>
+
+        <label>상세 내용</label>
+        <textarea id="detail"></textarea>
+
+        <button class="submit-btn">
+            신고하기
+        </button>
+
+    </div>
+
+    <!-- 배차표 -->
+    <div id="bus" class="section">
+        <h2>배차표 확인</h2>
+        <p>추후 구현 예정</p>
+    </div>
+
+</div>
+
+<script>
+
+function showSection(sectionId){
+
+    const sections =
+        document.querySelectorAll('.section');
+
+    sections.forEach(section=>{
+        section.classList.remove('active');
+    });
+
+    document
+        .getElementById(sectionId)
+        .classList.add('active');
+}
+
+function checkPassword(){
+
+    const pw =
+        document.getElementById('teacherPassword').value;
+
+    if(pw === 'energyhs'){
+
+        document
+            .getElementById('overnightForm')
+            .style.display = 'block';
+
+    }else{
+
+        alert('비밀번호가 올바르지 않습니다.');
+
+    }
+}
+
+</script>
+
+</body>
+</html>
+```
