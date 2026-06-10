@@ -153,7 +153,7 @@ textarea{
 
         <h2>기숙사 고장 신고</h2>
 
-        <label>호실</label>
+        <label>위치 (예: 3층 화장실)</label>
         <input type="text" id="room">
 
         <label>신고자</label>
@@ -163,11 +163,16 @@ textarea{
         <textarea id="location"></textarea>
 
         <label>상세 내용</label>
-        <textarea id="detail"></textarea>
+        <textarea id="detail"></textarea>  
+        
+        <button
+        class="submit-btn"
+        onclick="sendRepair()">
 
-        <button class="submit-btn">
-            신고하기
+        신고하기
+
         </button>
+
 
     </div>
 
@@ -221,6 +226,46 @@ function checkPassword(){
 
     }
 }
+
+
+async function sendRepair(){
+
+const data={
+
+room:
+document
+.getElementById("room")
+.value,
+
+detail:
+document
+.getElementById("detail")
+.value
+
+};
+
+await fetch(
+
+"https://script.google.com/macros/s/AKfycbxR3a0SPN6VrU58dJKBBmbjDPnybm-fuoVDCirIgwLXlsma7pD4wKQDAPL3VekSSVltvQ/exec",
+
+{
+
+method:"POST",
+
+body:
+JSON.stringify(data)
+
+}
+
+);
+
+alert(
+"신고가 접수되었습니다."
+);
+
+}
+
+
 
 </script>
 
